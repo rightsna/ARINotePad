@@ -1,6 +1,7 @@
 import 'package:ari_plugin/ari_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'note_provider.dart';
 
 class NotePage extends StatefulWidget {
@@ -69,30 +70,49 @@ class _NotePageState extends State<NotePage> {
         color: const Color(0xFF12121F),
         margin: const EdgeInsets.all(16),
         padding: const EdgeInsets.all(16),
-        child: TextField(
-          controller: provider.textController,
-          readOnly: provider.isReadOnly,
-          maxLines: null,
-          expands: true,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 14,
-            fontWeight: provider.isRichText
-                ? FontWeight.bold
-                : FontWeight.normal,
-            fontStyle: provider.isRichText
-                ? FontStyle.italic
-                : FontStyle.normal,
-            fontFamily: provider.isRichText ? 'Georgia' : 'Courier',
-          ),
-          decoration: InputDecoration(
-            hintText: provider.isReadOnly
-                ? 'Read only mode'
-                : 'Type something...',
-            hintStyle: const TextStyle(color: Colors.white24),
-            border: InputBorder.none,
-          ),
-        ),
+        child: provider.isRichText
+            ? Markdown(
+                data: provider.textController.text.isEmpty
+                    ? 'No content'
+                    : provider.textController.text,
+                padding: EdgeInsets.zero,
+                styleSheet: MarkdownStyleSheet(
+                  p: const TextStyle(color: Colors.white, fontSize: 14),
+                  h1: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                  h2: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+                  h3: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                  h4: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                  h5: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+                  h6: const TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                  em: const TextStyle(color: Colors.white, fontStyle: FontStyle.italic),
+                  strong: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  del: const TextStyle(color: Colors.white, decoration: TextDecoration.lineThrough),
+                  blockquote: const TextStyle(color: Colors.white54, fontStyle: FontStyle.italic),
+                  code: const TextStyle(color: Colors.greenAccent, fontFamily: 'Courier'),
+                  codeblockDecoration: BoxDecoration(
+                    color: Colors.white10,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              )
+            : TextField(
+                controller: provider.textController,
+                readOnly: provider.isReadOnly,
+                maxLines: null,
+                expands: true,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontFamily: 'Courier',
+                ),
+                decoration: InputDecoration(
+                  hintText: provider.isReadOnly
+                      ? 'Read only mode'
+                      : 'Type something...',
+                  hintStyle: const TextStyle(color: Colors.white24),
+                  border: InputBorder.none,
+                ),
+              ),
       ),
     );
   }
