@@ -2,6 +2,7 @@ import 'package:ari_plugin/ari_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'note_provider.dart';
 
 class NotePage extends StatefulWidget {
@@ -12,6 +13,21 @@ class NotePage extends StatefulWidget {
 }
 
 class _NotePageState extends State<NotePage> {
+  PackageInfo? _packageInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    _initPackageInfo();
+  }
+
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<NoteProvider>();
@@ -69,7 +85,9 @@ class _NotePageState extends State<NotePage> {
                 showAboutDialog(
                   context: context,
                   applicationName: 'ARI Note Pad',
-                  applicationVersion: '0.1.2+3',
+                  applicationVersion: _packageInfo != null
+                      ? '${_packageInfo!.version}+${_packageInfo!.buildNumber}'
+                      : '0.0.0',
                   applicationIcon: const FlutterLogo(),
                   children: [
                     const Text('A simple Note Pad bundle for ARI.'),
