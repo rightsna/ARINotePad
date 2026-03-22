@@ -63,6 +63,28 @@ class _NotePageState extends State<NotePage> {
                   : Colors.white,
             ),
           ),
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'version') {
+                showAboutDialog(
+                  context: context,
+                  applicationName: 'ARI Note Pad',
+                  applicationVersion: '0.1.2+3',
+                  applicationIcon: const FlutterLogo(),
+                  children: [
+                    const Text('A simple Note Pad bundle for ARI.'),
+                  ],
+                );
+              }
+            },
+            icon: const Icon(Icons.more_vert, color: Colors.white),
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'version',
+                child: Text('Version Info'),
+              ),
+            ],
+          ),
           const SizedBox(width: 8),
         ],
       ),
