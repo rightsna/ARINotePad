@@ -33,6 +33,15 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Generated plugin registrants
+**/generated_plugin_registrant.cc
+**/generated_plugin_registrant.h
+**/generated_plugin_registrant.dart
+**/generated_plugin_registrant.m
+**/generated_plugin_registrant.swift
+**/GeneratedPluginRegistrant.swift
+**/generated_plugins.cmake
+
 # Symbolication related
 app.*.symbols
 
