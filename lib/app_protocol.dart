@@ -11,7 +11,6 @@ class NotepadProtocol {
       appId: 'notepad',
       onCommand: _onCommand,
       onGetState: _onGetState,
-      onGetCommands: _onGetCommands,
     );
   }
 
@@ -49,11 +48,4 @@ class NotepadProtocol {
     };
   }
 
-  Map<String, String> _onGetCommands() {
-    return {
-      'UPDATE': '메모장의 전체 텍스트를 업데이트합니다. 파라미터: {"text": "내용"}',
-      'SET_RICH_MODE': '풍부한 텍스트 모드를 설정합니다. 파라미터: {"isRichText": true/false}',
-      'SET_EDIT_MODE': '읽기 전용 모드를 설정합니다. 파라미터: {"isReadOnly": true/false}',
-    };
-  }
 }

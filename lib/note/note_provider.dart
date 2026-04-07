@@ -1,4 +1,3 @@
-import 'package:ari_plugin/ari_plugin.dart';
 import 'package:flutter/material.dart';
 
 class NoteProvider extends ChangeNotifier {
@@ -10,8 +9,6 @@ class NoteProvider extends ChangeNotifier {
   NoteProvider({String initialContent = ''}) {
     textController = TextEditingController(text: initialContent);
     textController.addListener(_onTextChanged);
-    // 연결 상태 변경 리스너 등록
-    WsManager.connectionNotifier.addListener(_onConnectionChanged);
   }
 
   void _onTextChanged() {
@@ -19,9 +16,6 @@ class NoteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _onConnectionChanged() {
-    notifyListeners();
-  }
 
   void updateText(String text) {
     // 무한 루프 방지: 현재 텍스트와 다를 때만 업데이트
@@ -56,7 +50,6 @@ class NoteProvider extends ChangeNotifier {
 
   @override
   void dispose() {
-    WsManager.connectionNotifier.removeListener(_onConnectionChanged);
     textController.removeListener(_onTextChanged);
     textController.dispose();
     super.dispose();

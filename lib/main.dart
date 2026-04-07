@@ -26,8 +26,8 @@ void main(List<String> args) async {
       const String.fromEnvironment('ARI_HOST', defaultValue: '127.0.0.1');
 
   if (port.isNotEmpty) {
-    WsManager.init(host: host, port: int.parse(port));
-    WsManager.connect();
+    AriAgent.init(host: host, port: int.parse(port));
+    AriAgent.connect();
 
     // 구조도 깔끔하게: Protocol Handler 연동
     NotepadProtocol(noteProvider).build().start();
@@ -46,19 +46,24 @@ class NotepadApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'ARI Note Pad',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: const Color(0xFF6C63FF),
-        scaffoldBackgroundColor: const Color(0xFF0F0F1A),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF1A1A2E),
-          elevation: 0,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AriChatProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'ARI Note Pad',
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: const Color(0xFF6C63FF),
+          scaffoldBackgroundColor: const Color(0xFF0F0F1A),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF1A1A2E),
+            elevation: 0,
+          ),
         ),
+        home: const NotePage(),
       ),
-      home: const NotePage(),
     );
   }
 }
