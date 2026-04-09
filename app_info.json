@@ -1,10 +1,10 @@
 {
-  "app_id": "notepad",
-  "name": "ARI Note Pad",
-  "description": "텍스트를 빠르게 작성하고 ARI 명령으로 내용을 제어할 수 있는 메모장 앱입니다.",
-  "category": "productivity",
-  "github_url": "https://github.com/rightsna/ARINotePad",
-  "version": "0.1.6",
-  "version_code": 9,
-  "platform": "mac"
+    "app_id":  "notepad",
+    "name":  "ARI Note Pad",
+    "description":  "텍스트를 빠르게 작성하고 ARI 명령으로 내용을 제어할 수 있는 메모장 앱입니다.",
+    "category":  "productivity",
+    "github_url":  "https://github.com/rightsna/ARINotePad",
+    "version":  "0.1.7",
+    "version_code":  10,
+    "platform":  "mac"
 }
