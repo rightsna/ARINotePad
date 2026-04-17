@@ -1,12 +1,10 @@
-# ARI Plugin Skill: ARINotePad (Note Pad)
-
-## Overview
-`notepad`는 심플한 노트패드 번들로, 마크다운(Markdown) 문법 지원 및 읽기 전용/편집 모드 전환 기능을 제공합니다. 사용자의 요청을 텍스트로 기록하거나 원격으로 보여주고 싶을 때 사용합니다.
-
-### App ID
-`notepad`
-
 ---
+name: notepad
+description: 마크다운 지원 노트패드 플러그인입니다. 텍스트 기록, 원격 표시, 읽기전용/편집 모드 전환 요청 시 사용.
+allowed-tools: control_app read_app_state
+---
+
+# ARINotePad (Note Pad)
 
 ## Commands
 
